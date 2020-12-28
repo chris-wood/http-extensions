@@ -754,10 +754,13 @@ Table of Contents
 
    HTTP/1.1 201 Created
    Content-Type: application/json
-   Digest: id-sha-256=BZlF2v0IzjuxN01RQ97EUXriaNNLhtI8Chx8Eq+XYSc=
    Content-Location: /books/123
+   Digest: id-sha-256=yxOAqEeoj+reqygSIsLpT0LhumrNkIds5uLKtmdLyYE=
 
-   {"id": "123", "title": "New Title"}
+   {
+     "id": "123",
+     "title": "New Title"
+   }
 
    Note that a "204 No Content" response without payload data but with
    the same "Digest" field-value would have been legitimate too.
@@ -788,7 +791,7 @@ Table of Contents
 
    HTTP/1.1 201 Created
    Content-Type: application/json
-   Digest: id-sha-256=0o/WKwSfnmIoSlop2LV/ISaBDth05IeW27zzNMUh5l8=
+   Digest: id-sha-256=2LBp5RKZGpsSNf8BPXlXrX4Td4Tf5R5bZ9z7kdi5VvY=
    Location: /books/123
 
    {
@@ -826,9 +829,12 @@ Table of Contents
 
    HTTP/1.1 200 OK
    Content-Type: application/json
-   Digest: id-sha-256=BZlF2v0IzjuxN01RQ97EUXriaNNLhtI8Chx8Eq+XYSc=
+   Digest: id-sha-256=yxOAqEeoj+reqygSIsLpT0LhumrNkIds5uLKtmdLyYE=
 
-   {"id": "123", "title": "New Title"}
+   {
+     "id": "123",
+     "title": "New Title"
+   }
 
    Note that a "204 No Content" response without payload data but with
    the same "Digest" field-value would have been legitimate too.
@@ -1608,6 +1614,12 @@ Code Samples
    these are formatted as base64.  This function could be adapted to
    other algorithms and should take into account their specific
    formatting rules.
+
+   While the JSON objects in the examples are consistently formatted
+   using the compact notation (no indentation) for single-key entries
+   and 2-space indentation for multi-key entries, "Digest" is media-type
+   agnostic and does not provide canonicalization algorithms for
+   specific formats.
 
   import base64, json, hashlib, brotli, logging
   log = logging.getLogger()
