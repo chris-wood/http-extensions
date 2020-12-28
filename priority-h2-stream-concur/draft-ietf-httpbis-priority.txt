@@ -5,8 +5,8 @@
 HTTP                                                              K. Oku
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               L. Pardue
-Expires: 24 June 2021                                         Cloudflare
-                                                        21 December 2020
+Expires: 1 July 2021                                          Cloudflare
+                                                        28 December 2020
 
 
                Extensible Prioritization Scheme for HTTP
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 June 2021.
+   This Internet-Draft will expire on 1 July 2021.
 
 Copyright Notice
 
@@ -480,7 +480,7 @@ Table of Contents
 
    The Prioritized Stream ID SHOULD be a value within the limit of
    concurrent active streams, which is determined by the
-   SETTINGS_MAX_CONCURRENT_STREAMS paramater and streams in the "open"
+   SETTINGS_MAX_CONCURRENT_STREAMS parameter and streams in the "open"
    or "half-closed" state; see Section 5.1.2 of [RFC7540].  A server
    SHOULD NOT treat a Prioritized Stream ID beyond this limit as an
    error because it can buffer PRIORITY_UPDATE frames; see Section 6.
