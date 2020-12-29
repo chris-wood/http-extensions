@@ -5,8 +5,8 @@
 HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Intended status: Standards Track                               L. Pardue
-Expires: 1 July 2021                                          Cloudflare
-                                                        28 December 2020
+Expires: 2 July 2021                                          Cloudflare
+                                                        29 December 2020
 
 
                              Digest Headers
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 July 2021.
+   This Internet-Draft will expire on 2 July 2021.
 
 Copyright Notice
 
@@ -267,8 +267,9 @@ Table of Contents
    messages; for example, the payload data can be affected by Range
    Requests or methods such as HEAD, while the way the payload data is
    transferred "on the wire" is dependent on other transformations (eg.
-   transfer codings for HTTP/1.1 see 6.1 of [HTTP11]): Appendix A
-   contains several examples to help illustrate those effects.
+   transfer codings for HTTP/1.1 - see Section 6.1 of [HTTP11]):
+   Appendix A contains several examples to help illustrate those
+   effects.
 
    A representation digest consists of the value of a checksum computed
    on the entire selected "representation data" (see Section 8 of
