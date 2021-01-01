@@ -614,6 +614,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
 
    Response:
 
@@ -638,6 +639,7 @@ Table of Contents
    Request:
 
    HEAD /items/123 HTTP/1.1
+   Host: foo.example
    Digest: sha-256=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
 
    Response:
@@ -655,6 +657,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
    Range: bytes=1-7
 
    Response:
@@ -682,6 +685,7 @@ Table of Contents
    Request:
 
    PUT /items/123 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Accept-Encoding: br
    Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
@@ -690,7 +694,9 @@ Table of Contents
 
    Response:
 
+   HTTP/1.1 200 Ok
    Content-Type: application/json
+   Content-Location: /items/123
    Content-Encoding: br
    Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=
 
@@ -709,6 +715,7 @@ Table of Contents
    Request:
 
    PUT /items/123 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Content-Length: 18
    Accept-Encoding: br
@@ -740,6 +747,7 @@ Table of Contents
    Request:
 
    PUT /items/123 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Accept-Encoding: br
    Digest: sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
@@ -768,6 +776,7 @@ Table of Contents
    Request:
 
    POST /books HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Accept: application/json
    Accept-Encoding: identity
@@ -804,6 +813,7 @@ Table of Contents
    Request:
 
    POST /books HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Accept: application/json
    Accept-Encoding: identity
@@ -843,6 +853,7 @@ Table of Contents
    Request:
 
    PATCH /books/123 HTTP/1.1
+   Host: foo.example
    Content-Type: application/merge-patch+json
    Accept: application/json
    Accept-Encoding: identity
@@ -881,6 +892,7 @@ Table of Contents
    Request:
 
    PATCH /books/123 HTTP/1.1
+   Host: foo.example
    Content-Type: application/merge-patch+json
    Accept: application/json
    Accept-Encoding: identity
@@ -911,6 +923,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
 
    Response:
 
@@ -952,6 +965,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
    Want-Digest: sha-256;q=0.3, sha;q=1
 
    Response:
@@ -970,6 +984,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
    Want-Digest: sha;q=1
 
    Response:
@@ -989,6 +1004,7 @@ Table of Contents
    Request:
 
    GET /items/123 HTTP/1.1
+   Host: foo.example
    Want-Digest: sha;q=1
 
    Response:
@@ -1496,6 +1512,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    PUT /entries/1234 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
 
    {"hello": "world"}
@@ -1505,6 +1522,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    PUT /entries/1234 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
    Content-Encoding: gzip
 
@@ -1515,6 +1533,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    PUT /entries/1234 HTTP/1.1
+   Host: foo.example
    Content-Type: application/json
 
    H4sIAItWyFwC/6tWSlSyUlAypANQqgUAREcqfG0AAAA=
@@ -1525,6 +1544,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    GET /entries/1234 HTTP/1.1
+   Host: foo.example
    Range: bytes=1-7
 
    Response:
@@ -1541,6 +1561,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    HEAD /entries/1234 HTTP/1.1
+   Host: foo.example
    Accept: application/json
    Accept-Encoding: gzip
 
@@ -1559,6 +1580,7 @@ Appendix A.  Resource Representation and Representation-Data
    Request:
 
    POST /authors/ HTTP/1.1
+   Host: foo.example
    Accept: application/json
    Content-Type: application/json
 
