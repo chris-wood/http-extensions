@@ -80,7 +80,7 @@ Table of Contents
    6.  Use of Digest when acting on resources
      6.1.  Digest and PATCH
    7.  Deprecate Negotiation of Content-MD5
-   8.  Obsolete Digest Header Field Parameters
+   8.  Obsolete Digest Field Parameters
    9.  Relationship to Subresource Integrity (SRI)
      9.1.  Supporting Both SRI and Representation Digest
    10. Examples of Unsolicited Digest
@@ -154,7 +154,7 @@ Table of Contents
    An HTTP-level integrity mechanism that operates independent of
    transfer can be used to detect programming errors and/or corruption
    of data in flight or at rest, be used across multiple hops in order
-   to provide end-to-end integrity guarantees, aid fault diagnosis
+   to provide end-to-end integrity guarantees, can aid fault diagnosis
    across hops and system boundaries, and can be used to validate
    integrity when reconstructing a resource fetched using different HTTP
    connections.
@@ -188,8 +188,13 @@ Table of Contents
    representation, or conveys a partial representation of a resource eg.
    Range Requests (see Section 14.2 of [SEMANTICS]).
 
-   Changes are semantically compatible with existing implementations and
-   better cover both the request and response cases.
+   This document replaces [RFC3230] to better align with [SEMANTICS] and
+   to provide more detailed description of "Digest" usage in request and
+   response cases.  Changes are intended to be semantically compatible
+   with existing implementations but note that negotiation of "Content-
+   MD5" is deprecated Section 7, "Digest" field parameters are obsoleted
+   Section 8, "md5" and "sha" digest-algorithms are obsoleted
+   Section 12.2 and the "adler32" algorithm is deprecated Section 12.3.
 
    The value of "Digest" is calculated on selected representation, which
    is tied to the value contained in any "Content-Encoding" or "Content-
@@ -213,31 +218,30 @@ Table of Contents
 
    The goals do not include:
 
-   HTTP message integrity:  The digest mechanism described here does not
-      cover the full HTTP message nor its semantic, as representation
-      metadata are not included in the checksum.
+   HTTP message integrity:  Digest mechanisms do not cover the full HTTP
+      message nor its semantic, as representation metadata is not
+      included in the checksum.
 
-   HTTP field integrity:  The digest mechanisms described here cover
-      only representation and selected representation data, and do not
-      protect the integrity of associated representation metadata or
-      other message fields.
+   HTTP field integrity:  Digest mechanisms cover only representation
+      and selected representation data, and do not protect the integrity
+      of associated representation metadata or other message fields.
 
-   Authentication:  The digest mechanisms described here are not meant
-      to support authentication of the source of a digest or of a
-      message or anything else.  These mechanisms, therefore, are not a
-      sufficient defense against many kinds of malicious attacks.
+   Authentication:  Digest mechanisms do not support authentication of
+      the source of a digest, message or anything else.  These
+      mechanisms, therefore, are not a sufficient defense against many
+      kinds of malicious attacks.
 
    Privacy:  Digest mechanisms do not provide message privacy.
 
-   Authorization:  The digest mechanisms described here are not meant to
-      support authorization or other kinds of access controls.
+   Authorization:  Digest mechanisms do not support authorization or
+      other kinds of access controls.
 
 1.4.  Notational Conventions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-   "OPTIONAL" in this document are to be interpreted as described in BCP
-   14 ([RFC2119] and [RFC8174]) when, and only when, they appear in all
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
    This document uses the Augmented BNF defined in [RFC5234] and updated
@@ -266,15 +270,15 @@ Table of Contents
    This takes into account the effect of the HTTP semantics on the
    messages; for example, the payload data can be affected by Range
    Requests or methods such as HEAD, while the way the payload data is
-   transferred "on the wire" is dependent on other transformations (eg.
-   transfer codings for HTTP/1.1 - see Section 6.1 of [HTTP11]):
-   Appendix A contains several examples to help illustrate those
-   effects.
+   transferred "on the wire" is dependent on other transformations (e.g.
+   transfer codings for HTTP/1.1 - see Section 6.1 of [HTTP11]).  To
+   help illustrate how such things affect "Digest", several examples are
+   provided in Appendix A.
 
    A representation digest consists of the value of a checksum computed
    on the entire selected "representation data" (see Section 8 of
    [SEMANTICS]) of a resource identified according to Section 6.4.2 of
-   [SEMANTICS] together with an indication of the algorithm used
+   [SEMANTICS] together with an indication of the algorithm used:
 
       representation-data-digest = digest-algorithm "="
                                    <encoded digest output>
@@ -282,7 +286,7 @@ Table of Contents
    The checksum is computed using one of the digest-algorithms listed in
    Section 5 and then encoded in the associated format.
 
-   The example below shows the "sha-256" digest-algorithm which uses
+   The example below shows the "sha-256" digest-algorithm that uses
    base64 encoding.
 
       sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
@@ -294,6 +298,11 @@ Table of Contents
    requests and responses.
 
       Digest = 1#representation-data-digest
+
+   For example:
+
+   Digest: id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm
+                      AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
 
    The relationship between "Content-Location" (see Section 8.8 of
    [SEMANTICS]) and "Digest" is demonstrated in Section 10.7.  A
@@ -308,6 +317,9 @@ Table of Contents
    particularly useful in support of transitioning away from weaker
    algorithms should the need arise (see Section 12.9).
 
+   Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
+           id-sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
+
    A recipient MAY ignore any or all of the representation-data-digests
    in a Digest field.  This allows the recipient to choose which digest-
    algorithm(s) to use for validation instead of verifying every
@@ -317,17 +329,9 @@ Table of Contents
    algorithm without knowing whether the recipient supports the digest-
    algorithm, or even knowing that the recipient will ignore it.
 
-   "Digest" can be sent in a trailer section.  When using incremental
-   digest-algorithms this allows the sender and the receiver to
+   "Digest" can be sent in a trailer section.  When an incremental
+   digest-algorithms is used, the sender and the receiver can
    dynamically compute the digest value while streaming the content.
-
-   Two examples of its use are
-
-   Digest: id-sha-512=WZDPaVn/7XgHaAy8pmojAkGWoRx2UFChF41A2svX+TaPm
-                      AbwAgBWnrIiYllu7BNNyealdVLvRwE\nmTHWXvJwew==
-
-   Digest: sha-256=4REjxQ4yrqUVicfSKYNO/cF9zNj5ANbzgDZt3/h3Qxo=,
-           id-sha-256=X48E9qOokqqrvdts8nOJRJN3OWDUoyWxBf7kbu9DBPE=
 
 4.  The Want-Digest Field
 
@@ -351,7 +355,7 @@ Table of Contents
    sender's preferred digest-algorithm is the one (or ones) with the
    highest "qvalue".
 
-   Two examples of its use are
+   Two examples of its use are:
 
    Want-Digest: sha-256
    Want-Digest: sha-512;q=0.3, sha-256;q=1, unixsum;q=0
@@ -363,8 +367,8 @@ Table of Contents
 
       digest-algorithm = token
 
-   All digest-algorithm values are case-insensitive but the lower case
-   is preferred.
+   All digest-algorithm values are case-insensitive but lower case is
+   preferred.
 
    The Internet Assigned Numbers Authority (IANA) acts as a registry for
    digest-algorithm values.  The registry contains the tokens listed
@@ -486,17 +490,17 @@ Table of Contents
 
 6.1.  Digest and PATCH
 
-   In PATCH requests the representation digest MUST be computed on the
+   In PATCH requests, the representation digest MUST be computed on the
    patch document because the representation metadata refers to the
    patch document and not to the target resource (see Section 2 of
    [PATCH]).
 
-   In PATCH responses the representation digest MUST be computed on the
+   In PATCH responses, the representation digest MUST be computed on the
    selected representation of the patched resource.
 
-   "Digest" usage with PATCH is thus very similar to the POST one, but
-   with the resource's own semantic partly implied by the method and by
-   the patch document.
+   "Digest" usage with PATCH is thus very similar to POST, but with the
+   resource's own semantic partly implied by the method and by the patch
+   document.
 
 7.  Deprecate Negotiation of Content-MD5
 
@@ -504,20 +508,21 @@ Table of Contents
    obsoleted by [RFC7231].  The "contentMD5" token defined in Section 5
    of [RFC3230] MUST NOT be used as a digest-algorithm.
 
-8.  Obsolete Digest Header Field Parameters
+8.  Obsolete Digest Field Parameters
 
-   This document obsoletes the usage of parameters with "Digest"
-   introduced in Section 4.1.1 and 4.2 of [RFC3230] because this feature
-   has not been widely deployed and complicates field-value processing.
+   Section 4.1.1 and 4.2 of [RFC3230] defined field parameters.  This
+   document obsoletes the usage of parameters with "Digest" because this
+   feature has not been widely deployed and complicates field-value
+   processing.
 
-   Field parameters provided a common way to attach additional
-   information to a representation-data-digest, but if they are used as
-   an input to validate the checksum, an attacker could alter them to
-   steer the validation behavior.
+   [RFC3230] intended field parameters to provide a common way to attach
+   additional information to a representation-data-digest.  However, if
+   parameters are used as an input to validate the checksum, an attacker
+   could alter them to steer the validation behavior.
 
-   A digest-algorithm can still be parameterized defining its own way to
-   encode parameters into the representation-data-digest in such a way
-   as to mitigate security risks related to its computation.
+   A digest-algorithm can still be parameterized by defining its own way
+   to encode parameters into the representation-data-digest, in such a
+   way as to mitigate security risks related to its computation.
 
 9.  Relationship to Subresource Integrity (SRI)
 
