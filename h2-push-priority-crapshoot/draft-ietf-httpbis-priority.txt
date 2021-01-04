@@ -5,8 +5,8 @@
 HTTP                                                              K. Oku
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               L. Pardue
-Expires: 24 June 2021                                         Cloudflare
-                                                        21 December 2020
+Expires: 8 July 2021                                          Cloudflare
+                                                          4 January 2021
 
 
                Extensible Prioritization Scheme for HTTP
@@ -55,11 +55,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 June 2021.
+   This Internet-Draft will expire on 8 July 2021.
 
 Copyright Notice
 
-   Copyright (c) 2020 IETF Trust and the persons identified as the
+   Copyright (c) 2021 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -656,7 +656,7 @@ Table of Contents
    prioritize it against other active concurrent responses.  Pushing at
    too high a priority might cause client-requested resources to be
    blocked.  Pushing at too low a priority could delay the response,
-   negating intended goals or pushing.
+   negating intended goals of pushing.
 
    A pushed request has no explicit client-signalled initial priority
    but a server can still apply the merging guidance given in Section 7.
