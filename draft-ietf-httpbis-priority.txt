@@ -680,11 +680,6 @@ Table of Contents
    problematic and presents possible mitigations, or where unfairness is
    desirable.
 
-   TODO: Discuss if we should add a signal that mitigates this issue.
-   For example, we might add a SETTINGS parameter that indicates the
-   next hop that the connection is NOT coalesced (see
-   https://github.com/kazuho/draft-kazuho-httpbis-priority/issues/99).
-
 10.1.  Coalescing Intermediaries
 
    When an intermediary coalesces HTTP requests coming from multiple
