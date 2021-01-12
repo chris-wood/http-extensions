@@ -1743,7 +1743,7 @@ Changes
 
 Since draft-ietf-httpbis-digest-headers-04
 
-   *  Deprecate unixsum and unixcksum #1377
+   *  Obsolete crc32c, unixsum and unixcksum #1377
 
 Since draft-ietf-httpbis-digest-headers-03
 
