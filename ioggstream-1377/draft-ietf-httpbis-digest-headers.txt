@@ -118,7 +118,7 @@ Table of Contents
      13.2.  The "status" Field in the HTTP Digest Algorithm Values
              Registry
      13.3.  Deprecate "MD5" Digest Algorithm
-     13.4.  Deprecate "UNIXsum" Digest Algorithm
+     13.4.  Obsolete "UNIXsum" Digest Algorithm
      13.5.  Obsolete "UNIXcksum" Digest Algorithm
      13.6.  Obsolete "CRC32c" Digest Algorithm
      13.7.  Deprecate "SHA" Digest Algorithm
@@ -1215,7 +1215,7 @@ Table of Contents
 
    *  Status: As specified in Section 5.
 
-13.4.  Deprecate "UNIXsum" Digest Algorithm
+13.4.  Obsolete "UNIXsum" Digest Algorithm
 
    This memo updates the "UNIXsum" digest-algorithm in the HTTP Digest
    Algorithm Values (https://www.iana.org/assignments/http-dig-alg/http-
