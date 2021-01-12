@@ -5,8 +5,8 @@
 HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Intended status: Standards Track                               L. Pardue
-Expires: 15 July 2021                                         Cloudflare
-                                                         11 January 2021
+Expires: 16 July 2021                                         Cloudflare
+                                                         12 January 2021
 
 
                              Digest Headers
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 July 2021.
+   This Internet-Draft will expire on 16 July 2021.
 
 Copyright Notice
 
@@ -105,7 +105,7 @@ Table of Contents
    12. Security Considerations
      12.1.  Digest Does Not Protect the Full HTTP Message
      12.2.  Broken Cryptographic Algorithms
-     12.3.  Other Deprecated Algorithms
+     12.3.  Other Deprecated or Obsoleted Algorithms
      12.4.  Digest for End-to-End Integrity
      12.5.  Digest and Content-Location in Responses
      12.6.  Usage in Signatures
@@ -119,10 +119,10 @@ Table of Contents
              Registry
      13.3.  Deprecate "MD5" Digest Algorithm
      13.4.  Deprecate "UNIXsum" Digest Algorithm
-     13.5.  Deprecate "UNIXcksum" Digest Algorithm
-     13.6.  Update "CRC32c" Digest Algorithm
+     13.5.  Obsolete "UNIXcksum" Digest Algorithm
+     13.6.  Obsolete "CRC32c" Digest Algorithm
      13.7.  Deprecate "SHA" Digest Algorithm
-     13.8.  Obsolete "ADLER32" Digest Algorithm
+     13.8.  Deprecate "ADLER32" Digest Algorithm
      13.9.  Obsolete "contentMD5" token in Digest Algorithm
      13.10. The "id-sha-256" Digest Algorithm
      13.11. The "id-sha-512" Digest Algorithm
@@ -137,6 +137,7 @@ Table of Contents
    Acknowledgements
    Code Samples
    Changes
+     Since draft-ietf-httpbis-digest-headers-04
      Since draft-ietf-httpbis-digest-headers-03
      Since draft-ietf-httpbis-digest-headers-02
      Since draft-ietf-httpbis-digest-headers-01
@@ -194,8 +195,9 @@ Table of Contents
    response cases.  Changes are intended to be semantically compatible
    with existing implementations but note that negotiation of "Content-
    MD5" is deprecated Section 7, "Digest" field parameters are obsoleted
-   Section 8, "md5" and "sha" digest-algorithms are obsoleted
-   Section 12.2 and the "adler32" algorithm is deprecated Section 12.3.
+   Section 8, "md5" and "sha" digest-algorithms are deprecated
+   Section 12.2, the "adler32" algorithm is deprecated Section 12.3, and
+   the "unixsum", "unixcksum" and "crc32c" are obsoleted.
 
    The value of "Digest" is calculated on selected representation, which
    is tied to the value contained in any "Content-Encoding" or "Content-
@@ -423,11 +425,11 @@ Table of Contents
          representing the 16-bit checksum, which is the first word of
          the output of the UNIX "sum" command.  This digest-algorithm
          MUST NOT be used as it does not provide more protection than
-         the current integrity mechanisms such as TLS.
+         current integrity mechanisms such as TLS.
 
       *  Reference: [UNIX], this document.
 
-      *  Status: deprecated
+      *  Status: obsoleted
 
    unixcksum
       *  Description: The algorithm computed by the UNIX "cksum"
@@ -435,12 +437,12 @@ Table of Contents
          [UNIX].  The output of this algorithm is an ASCII digit string
          representing the 32-bit CRC, which is the first word of the
          output of the UNIX "cksum" command.  This digest-algorithm MUST
-         NOT be used as it does not provide more protection than the
-         current integrity mechanisms such as TLS.
+         NOT be used as it does not provide more protection than current
+         integrity mechanisms such as TLS.
 
       *  Reference: [UNIX], this document.
 
-      *  Status: deprecated
+      *  Status: obsoleted
 
    To allow sender and recipient to provide a checksum which is
    independent from "Content-Encoding", the following additional digest-
@@ -1041,12 +1043,16 @@ Table of Contents
    [CMU-836068].  The "md5" and "sha" digest-algorithms are vulnerable
    to collisions attacks, so they MUST NOT be used with "Digest".
 
-12.3.  Other Deprecated Algorithms
+12.3.  Other Deprecated or Obsoleted Algorithms
 
    The ADLER32 algorithm defined in [RFC1950] has been deprecated by
    [RFC3309] because, under certain conditions, it provides weak
    detection of errors.  It is now NOT RECOMMENDED for use with
    "Digest".
+
+   The "crc32c", "unixsum" and "unixcksum" digest-algorithms are now
+   obsoleted because they do not provide more protection than current
+   integrity mechanisms such as TLS.
 
 12.4.  Digest for End-to-End Integrity
 
@@ -1221,7 +1227,7 @@ Table of Contents
 
    *  Status: As specified in Section 5.
 
-13.5.  Deprecate "UNIXcksum" Digest Algorithm
+13.5.  Obsolete "UNIXcksum" Digest Algorithm
 
    This memo updates the "UNIXcksum" digest-algorithm in the HTTP Digest
    Algorithm Values (https://www.iana.org/assignments/http-dig-alg/http-
@@ -1233,7 +1239,7 @@ Table of Contents
 
    *  Status: As specified in Section 5.
 
-13.6.  Update "CRC32c" Digest Algorithm
+13.6.  Obsolete "CRC32c" Digest Algorithm
 
    This memo updates the "CRC32c" digest-algorithm in the HTTP Digest
    Algorithm Values (https://www.iana.org/assignments/http-dig-alg/http-
@@ -1248,11 +1254,13 @@ Table of Contents
       is encoded in hexadecimal (using between 1 and 8 ASCII characters
       from 0-9, A-F, and a-f; leading 0's are allowed).  For example,
       crc32c=0a72a4df and crc32c=A72A4DF are both valid checksums for
-      the 3-byte message "dog".
+      the 3-byte message "dog".  This digest-algorithm MUST NOT be used
+      as it does not provide more protection than current integrity
+      mechanisms such as TLS.
 
    *  Reference: [RFC4960] appendix B, this document.
 
-   *  Status: standard.
+   *  Status: obsoleted
 
 13.7.  Deprecate "SHA" Digest Algorithm
 
@@ -1266,7 +1274,7 @@ Table of Contents
 
    *  Status: As specified in Section 5.
 
-13.8.  Obsolete "ADLER32" Digest Algorithm
+13.8.  Deprecate "ADLER32" Digest Algorithm
 
    This memo updates the "ADLER32" digest-algorithm in the HTTP Digest
    Algorithm Values (https://www.iana.org/assignments/http-dig-alg/http-
@@ -1279,10 +1287,10 @@ Table of Contents
       encoded in hexadecimal (using between 1 and 8 ASCII characters
       from 0-9, A-F, and a-f; leading 0's are allowed).  For example,
       adler32=03da0195 and adler32=3DA0195 are both valid checksums for
-      the 4-byte message "Wiki".  This algorithm is obsoleted and SHOULD
+      the 4-byte message "Wiki".  This algorithm is deprecated and MUST
       NOT be used.
 
-   *  Status: obsoleted
+   *  Status: deprecated
 
 13.9.  Obsolete "contentMD5" token in Digest Algorithm
 
@@ -1336,11 +1344,12 @@ Table of Contents
    The status of "SHA" has been updated to "deprecated", and its
    description states that this algorithm MUST NOT be used.
 
-   The status for "CRC2c" has been updated to "standard".
+   The status for "ADLER32" has been updated to "deprecated", and its
+   description states that this algorithm MUST NOT be used
 
-   The status for "UNIXsum" and "UNIXcksum" has been updated to
-   "deprecated", and their description states that those algorithm MUST
-   NOT be used.
+   The status for the "CRC2c", "UNIXsum" and "UNIXcksum" has been
+   updated to "obsoleted", and their description states that those
+   algorithms MUST NOT be used.
 
    The "id-sha-256" and "id-sha-512" algorithms have been added to the
    registry.
@@ -1731,6 +1740,10 @@ Code Samples
 Changes
 
    _RFC Editor: Please remove this section before publication._
+
+Since draft-ietf-httpbis-digest-headers-04
+
+   *  Deprecate unixsum and unixcksum #1377
 
 Since draft-ietf-httpbis-digest-headers-03
 
