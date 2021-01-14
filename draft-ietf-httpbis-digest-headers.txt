@@ -5,8 +5,8 @@
 HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Intended status: Standards Track                               L. Pardue
-Expires: 15 July 2021                                         Cloudflare
-                                                         11 January 2021
+Expires: 18 July 2021                                         Cloudflare
+                                                         14 January 2021
 
 
                              Digest Headers
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 July 2021.
+   This Internet-Draft will expire on 18 July 2021.
 
 Copyright Notice
 
@@ -1440,9 +1440,9 @@ Table of Contents
    [SEMANTICS]
               Fielding, R., Nottingham, M., and J. Reschke, "HTTP
               Semantics", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-semantics-13, 14 December 2020,
+              httpbis-semantics-14, 12 January 2021,
               <http://www.ietf.org/internet-drafts/draft-ietf-httpbis-
-              semantics-13.txt>.
+              semantics-14.txt>.
 
    [UNIX]     The Open Group, "The Single UNIX Specification, Version 2
               - 6 Vol Set for UNIX 98", February 1997.
@@ -1451,8 +1451,8 @@ Table of Contents
 
    [HTTP11]   Fielding, R., Nottingham, M., and J. Reschke, "HTTP/1.1",
               Work in Progress, Internet-Draft, draft-ietf-httpbis-
-              messaging-13, 14 December 2020, <http://www.ietf.org/
-              internet-drafts/draft-ietf-httpbis-messaging-13.txt>.
+              messaging-14, 12 January 2021, <http://www.ietf.org/
+              internet-drafts/draft-ietf-httpbis-messaging-14.txt>.
 
    [I-D.ietf-httpbis-header-structure]
               Nottingham, M. and P. Kamp, "Structured Field Values for
