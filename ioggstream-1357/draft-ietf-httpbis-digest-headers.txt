@@ -5,8 +5,8 @@
 HTTP                                                            R. Polli
 Internet-Draft                         Team Digitale, Italian Government
 Intended status: Standards Track                               L. Pardue
-Expires: 15 July 2021                                         Cloudflare
-                                                         11 January 2021
+Expires: 19 July 2021                                         Cloudflare
+                                                         15 January 2021
 
 
                              Digest Headers
@@ -50,7 +50,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 July 2021.
+   This Internet-Draft will expire on 19 July 2021.
 
 Copyright Notice
 
@@ -283,6 +283,11 @@ Table of Contents
 
       representation-data-digest = digest-algorithm "="
                                    <encoded digest output>
+
+   When a message has no representation data (eg. a HEAD request) it is
+   still possible to assert that no representation data was sent
+   computing the representation digest on an empty string (see
+   Section 12.6).
 
    The checksum is computed using one of the digest-algorithms listed in
    Section 5 and then encoded in the associated format.
@@ -626,13 +631,14 @@ Table of Contents
 
 10.2.  Server Returns No Representation Data
 
-   In this example, a HEAD request is used to retrieve the checksum of a
-   resource.
-
    Requests without payload data can still send a "Digest" field
    applying the digest-algorithm to an empty representation.  This can
    be useful in conjunction with signatures to ensure that the sender
    did not convey any payload (see Section 12.6).
+
+   In this example, a HEAD request is used to retrieve the checksum of a
+   resource.  The request "Digest" field-value is calculated over an
+   empty string, as specified in Section 2.
 
    The response "Digest" field-value is calculated over the JSON object
    "{"hello": "world"}", which is not shown because there is no payload
@@ -1442,9 +1448,9 @@ Table of Contents
    [SEMANTICS]
               Fielding, R., Nottingham, M., and J. Reschke, "HTTP
               Semantics", Work in Progress, Internet-Draft, draft-ietf-
-              httpbis-semantics-13, 14 December 2020,
+              httpbis-semantics-14, 12 January 2021,
               <http://www.ietf.org/internet-drafts/draft-ietf-httpbis-
-              semantics-13.txt>.
+              semantics-14.txt>.
 
    [UNIX]     The Open Group, "The Single UNIX Specification, Version 2
               - 6 Vol Set for UNIX 98", February 1997.
@@ -1453,8 +1459,8 @@ Table of Contents
 
    [HTTP11]   Fielding, R., Nottingham, M., and J. Reschke, "HTTP/1.1",
               Work in Progress, Internet-Draft, draft-ietf-httpbis-
-              messaging-13, 14 December 2020, <http://www.ietf.org/
-              internet-drafts/draft-ietf-httpbis-messaging-13.txt>.
+              messaging-14, 12 January 2021, <http://www.ietf.org/
+              internet-drafts/draft-ietf-httpbis-messaging-14.txt>.
 
    [I-D.ietf-httpbis-header-structure]
               Nottingham, M. and P. Kamp, "Structured Field Values for
