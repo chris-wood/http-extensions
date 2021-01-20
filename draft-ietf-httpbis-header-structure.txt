@@ -5,8 +5,8 @@
 HTTP                                                       M. Nottingham
 Internet-Draft                                                    Fastly
 Intended status: Standards Track                               P-H. Kamp
-Expires: 18 July 2021                          The Varnish Cache Project
-                                                         14 January 2021
+Expires: 24 July 2021                          The Varnish Cache Project
+                                                         20 January 2021
 
 
                     Structured Field Values for HTTP
@@ -59,7 +59,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 18 July 2021.
+   This Internet-Draft will expire on 24 July 2021.
 
 Copyright Notice
 
@@ -377,10 +377,10 @@ Table of Contents
    list-member   = sf-item / inner-list
 
    Each member is separated by a comma and optional whitespace.  For
-   example, a field whose value is defined as a List of Strings could
+   example, a field whose value is defined as a List of Tokens could
    look like:
 
-   Example-List: "foo", "bar", "It was the best of times."
+   Example-List: sugar, tea, rum
 
    An empty List is denoted by not serializing the field at all.  This
    implies that fields defined as Lists have a default empty value.
@@ -389,12 +389,12 @@ Table of Contents
    the same header or trailer section, as per Section 3.2.2 of
    [RFC7230]; for example, the following are equivalent:
 
-   Example-List: foo, bar
+   Example-List: sugar, tea, rum
 
    and
 
-   Example-List: foo
-   Example-List: bar
+   Example-List: sugar, tea
+   Example-List: rum
 
    However, individual members of a List cannot be safely split between
    lines; see Section 4.2 for details.
